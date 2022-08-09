@@ -1,5 +1,5 @@
 {
-    "name": "novactive/ezseobundle",
+    "name": "mediatacom/ezseobundle",
     "description": "Novactive eZ SEO Bundle is an eZ Platform bundle for SEO simplications. metas, sitemaps, robots.txt, etc.",
     "keywords": [
         "seo",
@@ -27,7 +27,7 @@
         "MIT"
     ],
     "require": {
-        "php": "^7.3",
+        "php": "^7.3 | ^8.0",
         "ext-dom": "*",
         "ext-pdo": "*",
         "ext-json": "*"
