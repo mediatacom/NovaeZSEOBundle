@@ -34,8 +34,6 @@ use eZ\Publish\SPI\Persistence\Content\Type\Handler as ContentTypeHandler;
 use eZ\Publish\SPI\Variation\VariationHandler;
 use EzSystems\EzPlatformRichText\eZ\FieldType\RichText\Value as RichTextValue;
 use EzSystems\EzPlatformRichText\eZ\RichText\Converter as RichTextConverterInterface;
-use eZ\Publish\API\Repository\Exceptions\NotFoundException;
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
 
 class MetaNameSchema extends NameSchemaService
 {
@@ -317,16 +315,12 @@ class MetaNameSchema extends NameSchemaService
             return '';
         }
 
-        try {
-            $content = $this->repository->getContentService()->loadContent($value->destinationContentId);
+        $content = $this->repository->getContentService()->loadContent($value->destinationContentId);
 
-            foreach ($content->getFields() as $field) {
-                if ($field->value instanceof ImageValue) {
-                    return $this->handleImageValue($field->value, $fieldDefinitionIdentifier, $languageCode);
-                }
+        foreach ($content->getFields() as $field) {
+            if ($field->value instanceof ImageValue) {
+                return $this->handleImageValue($field->value, $fieldDefinitionIdentifier, $languageCode);
             }
-        } catch(NotFoundException | UnauthorizedException $e){
-            return '';
         }
 
         return '';
